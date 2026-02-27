@@ -10,7 +10,7 @@ import egusiFufuImg from '../assets/Home-images/egusi-fufu.svg';
 import ricePlantainImg from '../assets/Home-images/rice-plantain.svg';
 import promoImg from '../assets/Home-images/home-img.png';
 
-const Home = ({ onLoginClick }) => {
+const Home = ({ onLoginClick, onExploreClick }) => {
     const categories = [
         { name: 'Jollof Delights', img: jollofImg },
         { name: 'Swallow & Soups', img: swallowImg },
@@ -34,10 +34,10 @@ const Home = ({ onLoginClick }) => {
             {/* Top Navigation */}
             <header className="bg-white px-6 md:px-24 py-4 flex items-center justify-between sticky top-0 z-50 border-b border-gray-100">
                 <div className="flex items-center space-x-12">
-                    <h1 className="text-2xl font-pacifico text-chuks-orange">Chuks Kitchen</h1>
+                    <h1 className="text-2xl font-pacifico text-chuks-orange cursor-pointer">Chuks Kitchen</h1>
                     <nav className="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
                         <a href="#" className="text-chuks-orange">Home</a>
-                        <a href="#" className="hover:text-chuks-orange transition-colors">Explore</a>
+                        <button onClick={onExploreClick} className="hover:text-chuks-orange transition-colors">Explore</button>
                         <a href="#" className="hover:text-chuks-orange transition-colors">My Orders</a>
                         <a href="#" className="hover:text-chuks-orange transition-colors">Account</a>
                     </nav>
@@ -61,7 +61,7 @@ const Home = ({ onLoginClick }) => {
                         <p className="text-xl md:text-2xl text-gray-100 mb-10 font-light">
                             Handcrafted with passion, delivered with care.
                         </p>
-                        <button className="bg-chuks-orange text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-orange-600 transition-all shadow-xl active:scale-95">
+                        <button onClick={onExploreClick} className="bg-chuks-orange text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-orange-600 transition-all shadow-xl active:scale-95">
                             Browse Menu
                         </button>
                     </div>

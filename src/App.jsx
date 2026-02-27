@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Onboarding from './pages/Onboarding';
 import Signup from './pages/Signup';
+import Menu from './pages/Menu';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('onboarding');
@@ -11,6 +12,7 @@ function App() {
   const navigateToHome = () => setCurrentPage('home');
   const navigateToOnboarding = () => setCurrentPage('onboarding');
   const navigateToSignup = () => setCurrentPage('signup');
+  const navigateToMenu = () => setCurrentPage('menu');
 
   return (
     <div className="App md:h-screen">
@@ -21,7 +23,10 @@ function App() {
         />
       )}
       {currentPage === 'home' && (
-        <Home onLoginClick={navigateToLogin} />
+        <Home
+          onLoginClick={navigateToLogin}
+          onExploreClick={navigateToMenu}
+        />
       )}
       {currentPage === 'login' && (
         <Login
@@ -32,6 +37,12 @@ function App() {
       {currentPage === 'signup' && (
         <Signup
           onSignInClick={navigateToLogin}
+          onHomeClick={navigateToHome}
+        />
+      )}
+      {currentPage === 'menu' && (
+        <Menu
+          onLoginClick={navigateToLogin}
           onHomeClick={navigateToHome}
         />
       )}
