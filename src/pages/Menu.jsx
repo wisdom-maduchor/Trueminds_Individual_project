@@ -1,5 +1,5 @@
-import React from 'react';
-import homeHero from '../assets/Home-images/Home screen.svg';
+import React, { useState } from 'react';
+import homeHero from '../assets/Home-images/home-img.png';
 import amalaImg from '../assets/menu/Amala eith gbegiri and ewedu.svg';
 import ebaEgusiImg from '../assets/menu/eba & egusi.svg';
 import fufuOkraImg from '../assets/menu/fufu and okra soup.svg';
@@ -10,6 +10,18 @@ import pepperedSnailImg from '../assets/menu/peppered snail.svg';
 import poundedYamEdikImg from '../assets/menu/pounded yam & edikiakong.svg';
 
 const Menu = ({ onLoginClick }) => {
+    const [selectedCategory, setSelectedCategory] = useState('Popular');
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const categories = [
+        "Popular",
+        "Jollof Rice & Entrees",
+        "Swallow & Soups",
+        "Grills & sides",
+        "Beverages",
+        "Desserts"
+    ];
+
     return (
         <div className="flex flex-col min-h-screen bg-[#F9F9F9] font-inter">
             {/* Top Navigation */}
@@ -45,46 +57,59 @@ const Menu = ({ onLoginClick }) => {
             </section>
 
             {/* Main Content Area */}
-            <main className="max-w-7xl mx-auto w-full px-6 md:px-24 py-12 flex flex-col md:flex-row gap-10">
+            <main className="max-w-7xl mx-auto w-full px-6 md:px-24 py-12 flex flex-col">
 
-                {/* Sidebar Categories */}
-                <aside className="w-full md:w-64 flex-shrink-0">
-                    <div className="bg-white rounded-2xl shadow-sm p-6 sticky top-28 border border-gray-100">
-                        <h3 className="text-lg font-bold text-gray-900 mb-6 px-4">Menu Categories</h3>
-                        <ul className="space-y-1">
-                            <li>
-                                <button className="w-full text-left px-4 py-3 rounded-xl bg-orange-100 text-chuks-orange font-bold text-sm">
-                                    Popular
-                                </button>
-                            </li>
-                            <li>
-                                <button className="w-full text-left px-4 py-3 rounded-xl hover:bg-gray-50 text-gray-700 font-medium text-sm transition-colors">
-                                    Jollof Rice & Entrees
-                                </button>
-                            </li>
-                            <li>
-                                <button className="w-full text-left px-4 py-3 rounded-xl hover:bg-gray-50 text-gray-700 font-medium text-sm transition-colors">
-                                    Swallow & Soups
-                                </button>
-                            </li>
-                            <li>
-                                <button className="w-full text-left px-4 py-3 rounded-xl hover:bg-gray-50 text-gray-700 font-medium text-sm transition-colors">
-                                    Grills & sides
-                                </button>
-                            </li>
-                            <li>
-                                <button className="w-full text-left px-4 py-3 rounded-xl hover:bg-gray-50 text-gray-700 font-medium text-sm transition-colors">
-                                    Beverages
-                                </button>
-                            </li>
-                            <li>
-                                <button className="w-full text-left px-4 py-3 rounded-xl hover:bg-gray-50 text-gray-700 font-medium text-sm transition-colors">
-                                    Desserts
-                                </button>
-                            </li>
-                        </ul>
+                {/* Categories Dropdown Section */}
+                <div className="mb-10 relative">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-100 pb-8">
+                        <div>
+                            <h2 className="text-3xl font-bold text-gray-900 mb-2">Our Menu</h2>
+                            <p className="text-gray-500">Discover our delicious variety of authentic Nigerian dishes</p>
+                        </div>
+
+                        {/* Dropdown Menu */}
+                        <div className="relative w-full md:w-72">
+                            <button
+                                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                                className="w-full bg-white border border-gray-200 px-6 py-4 rounded-2xl flex items-center justify-between hover:border-chuks-orange transition-all shadow-sm group"
+                            >
+                                <div className="flex items-center space-x-3">
+                                    <span className="text-gray-400 text-xs font-bold uppercase tracking-wider">Category</span>
+                                    <span className="text-gray-900 font-bold">{selectedCategory}</span>
+                                </div>
+                                <svg
+                                    className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''} group-hover:text-chuks-orange`}
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+
+                            {/* Dropdown Content */}
+                            {isDropdownOpen && (
+                                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-100 rounded-2xl shadow-2xl z-40 py-2 animate-in fade-in slide-in-from-top-2 duration-200">
+                                    {categories.map((category) => (
+                                        <button
+                                            key={category}
+                                            onClick={() => {
+                                                setSelectedCategory(category);
+                                                setIsDropdownOpen(false);
+                                            }}
+                                            className={`w-full text-left px-6 py-3.5 text-sm font-semibold transition-colors ${selectedCategory === category
+                                                ? 'text-chuks-orange bg-orange-50'
+                                                : 'text-gray-600 hover:bg-gray-50 hover:text-chuks-orange'
+                                                }`}
+                                        >
+                                            {category}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     </div>
-                </aside>
+                </div>
 
                 {/* Menu Items Grid */}
                 <div className="flex-1">
