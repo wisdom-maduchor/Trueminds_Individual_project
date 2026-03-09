@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const FoodDetail = ({ food, onClose, onLoginClick }) => {
+const FoodDetail = ({ food, onClose, onLoginClick, onMyOrdersClick, onHomeClick, onExploreClick, onAddToCart }) => {
     const [selectedProtein, setSelectedProtein] = useState(food.proteins?.[0]?.label || '');
     const [selectedSides, setSelectedSides] = useState([]);
     const [specialInstructions, setSpecialInstructions] = useState('');
@@ -21,17 +21,48 @@ const FoodDetail = ({ food, onClose, onLoginClick }) => {
         return total;
     };
 
+    const handleAddToCart = () => {
+        const cartItem = {
+            id: food.id,
+            cartId: `${food.id}-${Date.now()}`, // Unique ID for cart entries
+            name: food.name,
+            image: food.image,
+            price: getTotalPrice(),
+            description: [
+                selectedProtein && `Protein: ${selectedProtein}`,
+                selectedSides.length > 0 && `Sides: ${selectedSides.join(', ')}`,
+                specialInstructions && `Notes: ${specialInstructions}`
+            ].filter(Boolean).join(', ') || food.description,
+            quantity: 1,
+            selectedProtein,
+            selectedSides,
+            specialInstructions
+        };
+        onAddToCart(cartItem);
+        onMyOrdersClick(); // Navigate to cart after adding
+    };
+
     return (
         <div className="flex flex-col min-h-screen bg-[#F9F9F9] font-inter">
             {/* Top Navigation */}
             <header className="bg-white px-6 md:px-24 py-4 flex items-center justify-between sticky top-0 z-50 border-b border-gray-100">
                 <div className="flex items-center space-x-12">
-                    <h1 className="text-2xl font-pacifico text-chuks-orange">Chuks Kitchen</h1>
+                    <h1
+                        className="text-2xl font-pacifico text-chuks-orange cursor-pointer"
+                        onClick={onHomeClick}
+                    >
+                        Chuks Kitchen
+                    </h1>
                     <nav className="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
-                        <a href="#" className="hover:text-chuks-orange transition-colors">Home</a>
-                        <a href="#" className="hover:text-chuks-orange transition-colors">Explore</a>
-                        <a href="#" className="hover:text-chuks-orange transition-colors">My Orders</a>
-                        <a href="#" className="hover:text-chuks-orange transition-colors">Account</a>
+                        <button onClick={onHomeClick} className="hover:text-chuks-orange transition-colors">Home</button>
+                        <button onClick={onExploreClick} className="hover:text-chuks-orange transition-colors">Explore</button>
+                        <button
+                            onClick={onMyOrdersClick}
+                            className="hover:text-chuks-orange transition-colors"
+                        >
+                            My Orders
+                        </button>
+                        <button className="hover:text-chuks-orange transition-colors">Account</button>
                     </nav>
                 </div>
                 <button
@@ -96,15 +127,15 @@ const FoodDetail = ({ food, onClose, onLoginClick }) => {
                                         <label
                                             key={protein.label}
                                             className={`flex items-center justify-between border rounded-xl px-5 py-3.5 cursor-pointer transition-all ${selectedProtein === protein.label
-                                                    ? 'border-chuks-orange bg-orange-50'
-                                                    : 'border-gray-200 hover:border-chuks-orange'
+                                                ? 'border-chuks-orange bg-orange-50'
+                                                : 'border-gray-200 hover:border-chuks-orange'
                                                 }`}
                                         >
                                             <div className="flex items-center gap-3">
                                                 <span
                                                     className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors ${selectedProtein === protein.label
-                                                            ? 'border-chuks-orange'
-                                                            : 'border-gray-300'
+                                                        ? 'border-chuks-orange'
+                                                        : 'border-gray-300'
                                                         }`}
                                                 >
                                                     {selectedProtein === protein.label && (
@@ -141,15 +172,15 @@ const FoodDetail = ({ food, onClose, onLoginClick }) => {
                                         <label
                                             key={side.label}
                                             className={`flex items-center justify-between border rounded-xl px-5 py-3.5 cursor-pointer transition-all ${selectedSides.includes(side.label)
-                                                    ? 'border-chuks-orange bg-orange-50'
-                                                    : 'border-gray-200 hover:border-chuks-orange'
+                                                ? 'border-chuks-orange bg-orange-50'
+                                                : 'border-gray-200 hover:border-chuks-orange'
                                                 }`}
                                         >
                                             <div className="flex items-center gap-3">
                                                 <span
                                                     className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 transition-colors ${selectedSides.includes(side.label)
-                                                            ? 'border-chuks-orange bg-chuks-orange'
-                                                            : 'border-gray-300'
+                                                        ? 'border-chuks-orange bg-chuks-orange'
+                                                        : 'border-gray-300'
                                                         }`}
                                                 >
                                                     {selectedSides.includes(side.label) && (
@@ -188,7 +219,10 @@ const FoodDetail = ({ food, onClose, onLoginClick }) => {
                         </section>
 
                         {/* Add to Cart */}
-                        <button className="w-full bg-chuks-orange text-white py-4 rounded-2xl font-bold text-base hover:bg-orange-600 transition-all shadow-lg active:scale-95">
+                        <button
+                            onClick={handleAddToCart}
+                            className="w-full bg-chuks-orange text-white py-4 rounded-2xl font-bold text-base hover:bg-orange-600 transition-all shadow-lg active:scale-95"
+                        >
                             Add to Cart — ₦{getTotalPrice().toLocaleString()}
                         </button>
                     </div>
@@ -207,11 +241,11 @@ const FoodDetail = ({ food, onClose, onLoginClick }) => {
                     <div>
                         <h3 className="text-lg font-bold mb-8">Quick Links</h3>
                         <ul className="space-y-4 text-gray-400 text-sm">
-                            <li><a href="#" className="hover:text-white transition-colors">Home</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Explore</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">My Order</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Account</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                            <li><button onClick={onHomeClick} className="hover:text-white transition-colors">Home</button></li>
+                            <li><button onClick={onExploreClick} className="hover:text-white transition-colors">Explore</button></li>
+                            <li><button onClick={onMyOrdersClick} className="hover:text-white transition-colors">My Order</button></li>
+                            <li><button className="hover:text-white transition-colors">Account</button></li>
+                            <li><button className="hover:text-white transition-colors">Contact</button></li>
                         </ul>
                     </div>
                     <div>

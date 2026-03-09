@@ -10,7 +10,7 @@ import egusiFufuImg from '../assets/Home-images/egusi-fufu.svg';
 import ricePlantainImg from '../assets/Home-images/rice-plantain.svg';
 import promoImg from '../assets/Home-images/home-img.png';
 
-const Home = ({ onLoginClick, onExploreClick }) => {
+const Home = ({ onLoginClick, onExploreClick, onMyOrdersClick, onHomeClick, onAddToCart }) => {
     const categories = [
         { name: 'Jollof Delights', img: jollofImg },
         { name: 'Swallow & Soups', img: swallowImg },
@@ -34,12 +34,22 @@ const Home = ({ onLoginClick, onExploreClick }) => {
             {/* Top Navigation */}
             <header className="bg-white px-6 md:px-24 py-4 flex items-center justify-between sticky top-0 z-50 border-b border-gray-100">
                 <div className="flex items-center space-x-12">
-                    <h1 className="text-2xl font-pacifico text-chuks-orange cursor-pointer">Chuks Kitchen</h1>
+                    <h1
+                        className="text-2xl font-pacifico text-chuks-orange cursor-pointer"
+                        onClick={onHomeClick}
+                    >
+                        Chuks Kitchen
+                    </h1>
                     <nav className="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
-                        <a href="#" className="text-chuks-orange">Home</a>
+                        <button onClick={onHomeClick} className="text-chuks-orange">Home</button>
                         <button onClick={onExploreClick} className="hover:text-chuks-orange transition-colors">Explore</button>
-                        <a href="#" className="hover:text-chuks-orange transition-colors">My Orders</a>
-                        <a href="#" className="hover:text-chuks-orange transition-colors">Account</a>
+                        <button
+                            onClick={onMyOrdersClick}
+                            className="hover:text-chuks-orange transition-colors"
+                        >
+                            My Orders
+                        </button>
+                        <button className="hover:text-chuks-orange transition-colors">Account</button>
                     </nav>
                 </div>
                 <button
@@ -112,7 +122,20 @@ const Home = ({ onLoginClick, onExploreClick }) => {
                             <p className="text-sm text-gray-500 mb-6 leading-relaxed line-clamp-2">{item.description}</p>
                             <div className="flex items-center justify-between mt-auto">
                                 <span className="text-xl font-bold text-chuks-orange">{item.price}</span>
-                                <button className="bg-chuks-orange text-white px-6 py-3 rounded-2xl font-bold text-sm hover:bg-orange-600 transition-colors shadow-lg shadow-orange-100 active:scale-95">
+                                <button
+                                    onClick={() => {
+                                        onAddToCart({
+                                            id: `special-${idx}`,
+                                            name: item.name,
+                                            price: parseInt(item.price.replace(/[^0-9]/g, '')),
+                                            description: item.description,
+                                            image: item.img,
+                                            quantity: 1
+                                        });
+                                        onMyOrdersClick();
+                                    }}
+                                    className="bg-chuks-orange text-white px-6 py-3 rounded-2xl font-bold text-sm hover:bg-orange-600 transition-colors shadow-lg shadow-orange-100 active:scale-95"
+                                >
                                     Add to cart
                                 </button>
                             </div>
@@ -151,11 +174,11 @@ const Home = ({ onLoginClick, onExploreClick }) => {
                     <div>
                         <h3 className="text-lg font-bold mb-8">Quick Links</h3>
                         <ul className="space-y-4 text-gray-400 text-sm">
-                            <li><a href="#" className="hover:text-white transition-colors">Home</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Explore</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">My Order</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Account</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                            <li><button onClick={onHomeClick} className="hover:text-white transition-colors">Home</button></li>
+                            <li><button onClick={onExploreClick} className="hover:text-white transition-colors">Explore</button></li>
+                            <li><button onClick={onMyOrdersClick} className="hover:text-white transition-colors">My Order</button></li>
+                            <li><button className="hover:text-white transition-colors">Account</button></li>
+                            <li><button className="hover:text-white transition-colors">Contact</button></li>
                         </ul>
                     </div>
                     <div>

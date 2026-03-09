@@ -212,7 +212,7 @@ const menuSections = [
 ];
 
 // ─── Single food card ─────────────────────────────────────────────────────────
-const FoodCard = ({ item, onSelect }) => (
+const FoodCard = ({ item, onSelect, onAddToCart, onMyOrdersClick }) => (
     <div
         className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 hover:shadow-xl transition-all flex flex-col h-full group cursor-pointer"
         onClick={() => onSelect(item)}
@@ -230,7 +230,18 @@ const FoodCard = ({ item, onSelect }) => (
             <span className="font-bold text-chuks-orange">₦{item.basePrice.toLocaleString()}</span>
             <button
                 className="text-chuks-orange hover:text-orange-600 bg-orange-50 p-2 rounded-full transition-colors"
-                onClick={(e) => { e.stopPropagation(); onSelect(item); }}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    onAddToCart({
+                        id: item.id,
+                        name: item.name,
+                        price: item.basePrice,
+                        description: item.description,
+                        image: item.image,
+                        quantity: 1
+                    });
+                    onMyOrdersClick();
+                }}
             >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -241,7 +252,7 @@ const FoodCard = ({ item, onSelect }) => (
 );
 
 // ─── Menu page ────────────────────────────────────────────────────────────────
-const Menu = ({ onLoginClick, onFoodSelect }) => {
+const Menu = ({ onLoginClick, onHomeClick, onFoodSelect, onMyOrdersClick, onAddToCart }) => {
     const [selectedCategory, setSelectedCategory] = useState('Popular');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -259,12 +270,22 @@ const Menu = ({ onLoginClick, onFoodSelect }) => {
             {/* Top Navigation */}
             <header className="bg-white px-6 md:px-24 py-4 flex items-center justify-between sticky top-0 z-50 border-b border-gray-100">
                 <div className="flex items-center space-x-12">
-                    <h1 className="text-2xl font-pacifico text-chuks-orange">Chuks Kitchen</h1>
+                    <h1
+                        className="text-2xl font-pacifico text-chuks-orange cursor-pointer"
+                        onClick={onHomeClick}
+                    >
+                        Chuks Kitchen
+                    </h1>
                     <nav className="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
-                        <a href="#" className="hover:text-chuks-orange transition-colors">Home</a>
-                        <a href="#" className="text-chuks-orange">Explore</a>
-                        <a href="#" className="hover:text-chuks-orange transition-colors">My Orders</a>
-                        <a href="#" className="hover:text-chuks-orange transition-colors">Account</a>
+                        <button onClick={onHomeClick} className="hover:text-chuks-orange transition-colors">Home</button>
+                        <button className="text-chuks-orange">Explore</button>
+                        <button
+                            onClick={onMyOrdersClick}
+                            className="hover:text-chuks-orange transition-colors"
+                        >
+                            My Orders
+                        </button>
+                        <button className="hover:text-chuks-orange transition-colors">Account</button>
                     </nav>
                 </div>
                 <button
@@ -351,7 +372,13 @@ const Menu = ({ onLoginClick, onFoodSelect }) => {
                             </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {section.items.map((item) => (
-                                    <FoodCard key={item.id} item={item} onSelect={onFoodSelect} />
+                                    <FoodCard
+                                        key={item.id}
+                                        item={item}
+                                        onSelect={onFoodSelect}
+                                        onAddToCart={onAddToCart}
+                                        onMyOrdersClick={onMyOrdersClick}
+                                    />
                                 ))}
                             </div>
                         </section>
@@ -371,11 +398,11 @@ const Menu = ({ onLoginClick, onFoodSelect }) => {
                     <div>
                         <h3 className="text-lg font-bold mb-8">Quick Links</h3>
                         <ul className="space-y-4 text-gray-400 text-sm">
-                            <li><a href="#" className="hover:text-white transition-colors">Home</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Explore</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">My Order</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Account</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                            <li><button onClick={onHomeClick} className="hover:text-white transition-colors">Home</button></li>
+                            <li><button className="text-white">Explore</button></li>
+                            <li><button onClick={onMyOrdersClick} className="hover:text-white transition-colors">My Order</button></li>
+                            <li><button className="hover:text-white transition-colors">Account</button></li>
+                            <li><button className="hover:text-white transition-colors">Contact</button></li>
                         </ul>
                     </div>
                     <div>
