@@ -9,7 +9,239 @@ import jollofChickenImg from '../assets/menu/jollof rice and chicken.svg';
 import pepperedSnailImg from '../assets/menu/peppered snail.svg';
 import poundedYamEdikImg from '../assets/menu/pounded yam & edikiakong.svg';
 
-const Menu = ({ onLoginClick }) => {
+// ─── Food data (passed into FoodDetail when a card is clicked) ───────────────
+const menuSections = [
+    {
+        title: 'Popular',
+        items: [
+            {
+                id: 'jollof-chicken',
+                name: 'Jollof Rice with Fried Chicken',
+                basePrice: 2800,
+                image: jollofChickenImg,
+                description:
+                    'Our signature Jollof rice, cooked to perfection with aromatic spices, served with juicy, golden-fried chicken. A classic Nigerian comfort food, rich in flavour and satisfying. Perfect for a quick lunch or a hearty dinner.',
+                tags: [
+                    { icon: '🌶️', label: 'Mildly spicy' },
+                    { icon: '🥦', label: 'Vegetarian option available' },
+                ],
+                proteins: [
+                    { label: 'Fried Chicken', extra: 0 },
+                    { label: 'Grilled Fish', extra: 500 },
+                    { label: 'Beef', extra: 700 },
+                ],
+                extraSides: [
+                    { label: 'Fried Plantain', price: 700 },
+                    { label: 'Coleslaw', price: 500 },
+                    { label: 'Extra Pepper Sauce', price: 300 },
+                ],
+            },
+            {
+                id: 'eba-egusi',
+                name: 'Eba & Egusi Soup (Goat Meat)',
+                basePrice: 3500,
+                image: ebaEgusiImg,
+                description: 'Hearty Egusi soup with tender goat meat, served with soft Eba. A true taste of Nigerian tradition.',
+                tags: [{ icon: '🥬', label: 'Rich in protein' }],
+                proteins: [
+                    { label: 'Goat Meat', extra: 0 },
+                    { label: 'Assorted Meats', extra: 400 },
+                ],
+                extraSides: [
+                    { label: 'Extra Eba', price: 300 },
+                    { label: 'Extra Egusi', price: 500 },
+                ],
+            },
+            {
+                id: 'pounded-yam-edik',
+                name: 'Pounded Yam & Edikaikong',
+                basePrice: 4200,
+                image: poundedYamEdikImg,
+                description: 'Traditional pounded yam with rich, leafy Edikaikong soup — a wholesome, nutrient-packed delight.',
+                tags: [{ icon: '🥬', label: 'Leafy & Nutritious' }],
+                proteins: [
+                    { label: 'Assorted Meat', extra: 0 },
+                    { label: 'Stockfish', extra: 300 },
+                ],
+                extraSides: [
+                    { label: 'Extra Pounded Yam', price: 400 },
+                ],
+            },
+            {
+                id: 'peppered-snail',
+                name: 'Peppered Snail',
+                basePrice: 7500,
+                image: pepperedSnailImg,
+                description: 'Spicy and savory peppered snail, cooked in fiery peppers and spices. Perfect as a starter or side dish.',
+                tags: [{ icon: '🌶️', label: 'Very spicy' }],
+                proteins: [],
+                extraSides: [
+                    { label: 'Extra Pepper Sauce', price: 300 },
+                    { label: 'Toothpicks', price: 50 },
+                ],
+            },
+            {
+                id: 'grilled-tilapia',
+                name: 'Grilled Tilapia Fish',
+                basePrice: 8500,
+                image: grilledTilapiaImg,
+                description: 'Whole grilled tilapia seasoned with our special spices, served with a side of your choice.',
+                tags: [
+                    { icon: '🐟', label: 'Fresh Fish' },
+                    { icon: '🔥', label: 'Grilled' },
+                ],
+                proteins: [],
+                extraSides: [
+                    { label: 'Fried Plantain', price: 700 },
+                    { label: 'Coleslaw', price: 500 },
+                    { label: 'Jollof Rice', price: 1200 },
+                ],
+            },
+            {
+                id: 'jollof-chicken-2',
+                name: 'Jollof Rice & Fried Chicken',
+                basePrice: 3500,
+                image: jollofChickenImg,
+                description: 'Our signature Jollof rice, served with crispy fried chicken and plantain.',
+                tags: [{ icon: '🌶️', label: 'Mildly spicy' }],
+                proteins: [
+                    { label: 'Fried Chicken', extra: 0 },
+                    { label: 'Beef', extra: 700 },
+                ],
+                extraSides: [
+                    { label: 'Fried Plantain', price: 700 },
+                ],
+            },
+        ],
+    },
+    {
+        title: 'Jollof Rice & Entrees',
+        items: [
+            {
+                id: 'jollof-smoked-fish',
+                name: 'Jollof Rice & Smoked Fish',
+                basePrice: 4500,
+                image: jollofSmokedFishImg,
+                description: 'Flavorful jollof rice served with perfectly smoked fish — a delightful Nigerian classic.',
+                tags: [{ icon: '🐟', label: 'Smoked Fish' }],
+                proteins: [
+                    { label: 'Smoked Fish', extra: 0 },
+                    { label: 'Grilled Fish', extra: 300 },
+                ],
+                extraSides: [
+                    { label: 'Fried Plantain', price: 700 },
+                    { label: 'Coleslaw', price: 500 },
+                ],
+            },
+            {
+                id: 'party-jollof-veg',
+                name: 'Party Jollof Rice (Veg)',
+                basePrice: 3000,
+                image: jollofChickenImg,
+                description: 'Vegetarian party jollof, full of rich flavors — no meat, all taste.',
+                tags: [{ icon: '🥦', label: 'Vegetarian' }],
+                proteins: [],
+                extraSides: [
+                    { label: 'Fried Plantain', price: 700 },
+                    { label: 'Coleslaw', price: 500 },
+                ],
+            },
+            {
+                id: 'party-jollof-veg-2',
+                name: 'Party Jollof Rice (Veg)',
+                basePrice: 3000,
+                image: jollofChickenImg,
+                description: 'Vegetarian party jollof, full of rich flavors — no meat, all taste.',
+                tags: [{ icon: '🥦', label: 'Vegetarian' }],
+                proteins: [],
+                extraSides: [
+                    { label: 'Fried Plantain', price: 700 },
+                ],
+            },
+        ],
+    },
+    {
+        title: 'Swallow & Soups',
+        items: [
+            {
+                id: 'amala-gbegiri',
+                name: 'Amala with Gbegiri & Ewedu',
+                basePrice: 3500,
+                image: amalaImg,
+                description: 'Classic Amala served with Gbegiri, Ewedu and assorted meats — true Yoruba cuisine.',
+                tags: [{ icon: '🫘', label: 'Traditional' }],
+                proteins: [
+                    { label: 'Assorted Meats', extra: 0 },
+                    { label: 'Beef Only', extra: 200 },
+                ],
+                extraSides: [
+                    { label: 'Extra Gbegiri', price: 400 },
+                    { label: 'Extra Ewedu', price: 400 },
+                ],
+            },
+            {
+                id: 'fufu-okra',
+                name: 'Fufu & Okra Soup (Fish)',
+                basePrice: 3500,
+                image: fufuOkraImg,
+                description: 'Light Fufu served with fresh Okra soup and tilapia fish — a West African staple.',
+                tags: [{ icon: '🐟', label: 'Fresh Fish' }],
+                proteins: [
+                    { label: 'Tilapia Fish', extra: 0 },
+                    { label: 'Catfish', extra: 400 },
+                ],
+                extraSides: [
+                    { label: 'Extra Fufu', price: 300 },
+                    { label: 'Extra Pepper', price: 200 },
+                ],
+            },
+            {
+                id: 'fufu-okra-2',
+                name: 'Fufu & Okra Soup (Fish)',
+                basePrice: 3500,
+                image: fufuOkraImg,
+                description: 'Light Fufu served with fresh Okra soup and tilapia fish — a West African staple.',
+                tags: [{ icon: '🐟', label: 'Fresh Fish' }],
+                proteins: [
+                    { label: 'Tilapia Fish', extra: 0 },
+                ],
+                extraSides: [],
+            },
+        ],
+    },
+];
+
+// ─── Single food card ─────────────────────────────────────────────────────────
+const FoodCard = ({ item, onSelect }) => (
+    <div
+        className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 hover:shadow-xl transition-all flex flex-col h-full group cursor-pointer"
+        onClick={() => onSelect(item)}
+    >
+        <div className="h-40 overflow-hidden rounded-2xl mb-4">
+            <img
+                src={item.image}
+                alt={item.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+        </div>
+        <h4 className="text-lg font-bold text-gray-900 mb-2">{item.name}</h4>
+        <p className="text-xs text-gray-500 mb-4 line-clamp-2 leading-relaxed">{item.description}</p>
+        <div className="mt-auto flex justify-between items-center">
+            <span className="font-bold text-chuks-orange">₦{item.basePrice.toLocaleString()}</span>
+            <button
+                className="text-chuks-orange hover:text-orange-600 bg-orange-50 p-2 rounded-full transition-colors"
+                onClick={(e) => { e.stopPropagation(); onSelect(item); }}
+            >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+            </button>
+        </div>
+    </div>
+);
+
+// ─── Menu page ────────────────────────────────────────────────────────────────
+const Menu = ({ onLoginClick, onFoodSelect }) => {
     const [selectedCategory, setSelectedCategory] = useState('Popular');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -87,7 +319,6 @@ const Menu = ({ onLoginClick }) => {
                                 </svg>
                             </button>
 
-                            {/* Dropdown Content */}
                             {isDropdownOpen && (
                                 <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-100 rounded-2xl shadow-2xl z-40 py-2 animate-in fade-in slide-in-from-top-2 duration-200">
                                     {categories.map((category) => (
@@ -113,218 +344,18 @@ const Menu = ({ onLoginClick }) => {
 
                 {/* Menu Items Grid */}
                 <div className="flex-1">
-                    {/* Section: Popular */}
-                    <section className="mb-16">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-8 border-b border-gray-200 pb-2">Popular</h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {/* Card 1 */}
-                            <div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 hover:shadow-xl transition-all flex flex-col h-full group">
-                                <div className="h-40 overflow-hidden rounded-2xl mb-4">
-                                    <img src={jollofChickenImg} alt="Jollof Rice & Fried Chicken" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-lg font-bold text-gray-900 mb-2">Jollof Rice & Fried Chicken</h4>
-                                <p className="text-xs text-gray-500 mb-4 line-clamp-2 leading-relaxed">Our signature Jollof rice, served with crispy fried chicken and plantain.</p>
-                                <div className="mt-auto flex justify-between items-center">
-                                    <span className="font-bold text-chuks-orange">N3,500</span>
-                                    <button className="text-chuks-orange hover:text-orange-600 bg-orange-50 p-2 rounded-full transition-colors">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                        </svg>
-                                    </button>
-                                </div>
+                    {menuSections.map((section) => (
+                        <section key={section.title} className="mb-16">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-8 border-b border-gray-200 pb-2">
+                                {section.title}
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {section.items.map((item) => (
+                                    <FoodCard key={item.id} item={item} onSelect={onFoodSelect} />
+                                ))}
                             </div>
-                            {/* Card 2 */}
-                            <div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 hover:shadow-xl transition-all flex flex-col h-full group">
-                                <div className="h-40 overflow-hidden rounded-2xl mb-4">
-                                    <img src={ebaEgusiImg} alt="Eba & Egusi Soup" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-lg font-bold text-gray-900 mb-2">Eba & Egusi Soup (Goat Meat)</h4>
-                                <p className="text-xs text-gray-500 mb-4 line-clamp-2 leading-relaxed">Hearty Egusi soup with tender goat meat, served with soft Eba.</p>
-                                <div className="mt-auto flex justify-between items-center">
-                                    <span className="font-bold text-chuks-orange">N3,500</span>
-                                    <button className="text-chuks-orange hover:text-orange-600 bg-orange-50 p-2 rounded-full transition-colors">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            {/* Card 3 */}
-                            <div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 hover:shadow-xl transition-all flex flex-col h-full group">
-                                <div className="h-40 overflow-hidden rounded-2xl mb-4">
-                                    <img src={poundedYamEdikImg} alt="Pounded Yam & Edikaikong" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-lg font-bold text-gray-900 mb-2">Pounded Yam & Edikaikong</h4>
-                                <p className="text-xs text-gray-500 mb-4 line-clamp-2 leading-relaxed">Traditional pounded yam with rich, leafy Edikaikong soup.</p>
-                                <div className="mt-auto flex justify-between items-center">
-                                    <span className="font-bold text-chuks-orange">N4,200</span>
-                                    <button className="text-chuks-orange hover:text-orange-600 bg-orange-50 p-2 rounded-full transition-colors">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            {/* Card 4 */}
-                            <div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 hover:shadow-xl transition-all flex flex-col h-full group">
-                                <div className="h-40 overflow-hidden rounded-2xl mb-4">
-                                    <img src={pepperedSnailImg} alt="Peppered Snail" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-lg font-bold text-gray-900 mb-2">Peppered Snail</h4>
-                                <p className="text-xs text-gray-500 mb-4 line-clamp-2 leading-relaxed">Spicy and savory peppered snail, perfect as a starter.</p>
-                                <div className="mt-auto flex justify-between items-center">
-                                    <span className="font-bold text-chuks-orange">N7,500</span>
-                                    <button className="text-chuks-orange hover:text-orange-600 bg-orange-50 p-2 rounded-full transition-colors">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            {/* Card 5 */}
-                            <div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 hover:shadow-xl transition-all flex flex-col h-full group">
-                                <div className="h-40 overflow-hidden rounded-2xl mb-4">
-                                    <img src={grilledTilapiaImg} alt="Grilled Tilapia Fish" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-lg font-bold text-gray-900 mb-2">Grilled Tilapia Fish</h4>
-                                <p className="text-xs text-gray-500 mb-4 line-clamp-2 leading-relaxed">Whole grilled tilapia seasoned with our special spices.</p>
-                                <div className="mt-auto flex justify-between items-center">
-                                    <span className="font-bold text-chuks-orange">N8,500</span>
-                                    <button className="text-chuks-orange hover:text-orange-600 bg-orange-50 p-2 rounded-full transition-colors">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            {/* Card 6 */}
-                            <div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 hover:shadow-xl transition-all flex flex-col h-full group">
-                                <div className="h-40 overflow-hidden rounded-2xl mb-4">
-                                    <img src={jollofChickenImg} alt="Jollof Rice & Fried Chicken" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-lg font-bold text-gray-900 mb-2">Jollof Rice & Fried Chicken</h4>
-                                <p className="text-xs text-gray-500 mb-4 line-clamp-2 leading-relaxed">Our signature Jollof rice, served with crispy fried chicken and plantain.</p>
-                                <div className="mt-auto flex justify-between items-center">
-                                    <span className="font-bold text-chuks-orange">N3,500</span>
-                                    <button className="text-chuks-orange hover:text-orange-600 bg-orange-50 p-2 rounded-full transition-colors">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Section: Jollof Rice & Entrees */}
-                    <section className="mb-16">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-8 border-b border-gray-200 pb-2">Jollof Rice & Entrees</h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {/* Card 1 */}
-                            <div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 hover:shadow-xl transition-all flex flex-col h-full group">
-                                <div className="h-40 overflow-hidden rounded-2xl mb-4">
-                                    <img src={jollofSmokedFishImg} alt="Jollof Rice & Smoked Fish" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-lg font-bold text-gray-900 mb-2">Jollof Rice & Smoked Fish</h4>
-                                <p className="text-xs text-gray-500 mb-4 line-clamp-2 leading-relaxed">Flavorful jollof rice served with perfectly smoked fish.</p>
-                                <div className="mt-auto flex justify-between items-center">
-                                    <span className="font-bold text-chuks-orange">N4,500</span>
-                                    <button className="text-chuks-orange hover:text-orange-600 bg-orange-50 p-2 rounded-full transition-colors">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            {/* Card 2 */}
-                            <div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 hover:shadow-xl transition-all flex flex-col h-full group">
-                                <div className="h-40 overflow-hidden rounded-2xl mb-4">
-                                    <img src={jollofChickenImg} alt="Party Jollof Rice" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-lg font-bold text-gray-900 mb-2">Party Jollof Rice (Veg)</h4>
-                                <p className="text-xs text-gray-500 mb-4 line-clamp-2 leading-relaxed">Vegetarian party jollof, full of rich flavors.</p>
-                                <div className="mt-auto flex justify-between items-center">
-                                    <span className="font-bold text-chuks-orange">N3,000</span>
-                                    <button className="text-chuks-orange hover:text-orange-600 bg-orange-50 p-2 rounded-full transition-colors">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            {/* Card 3 */}
-                            <div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 hover:shadow-xl transition-all flex flex-col h-full group">
-                                <div className="h-40 overflow-hidden rounded-2xl mb-4">
-                                    <img src={jollofChickenImg} alt="Party Jollof Rice" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-lg font-bold text-gray-900 mb-2">Party Jollof Rice (Veg)</h4>
-                                <p className="text-xs text-gray-500 mb-4 line-clamp-2 leading-relaxed">Vegetarian party jollof, full of rich flavors.</p>
-                                <div className="mt-auto flex justify-between items-center">
-                                    <span className="font-bold text-chuks-orange">N3,000</span>
-                                    <button className="text-chuks-orange hover:text-orange-600 bg-orange-50 p-2 rounded-full transition-colors">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Section: Swallow & Soups */}
-                    <section className="mb-16">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-8 border-b border-gray-200 pb-2">Swallow & Soups</h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {/* Card 1 */}
-                            <div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 hover:shadow-xl transition-all flex flex-col h-full group">
-                                <div className="h-40 overflow-hidden rounded-2xl mb-4">
-                                    <img src={amalaImg} alt="Amala with Gbegiri" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-lg font-bold text-gray-900 mb-2">Amala with Gbegiri & Ewedu</h4>
-                                <p className="text-xs text-gray-500 mb-4 line-clamp-2 leading-relaxed">Classic Amala served with Gbegiri, Ewedu and assorted meats.</p>
-                                <div className="mt-auto flex justify-between items-center">
-                                    <span className="font-bold text-chuks-orange">N3,500</span>
-                                    <button className="text-chuks-orange hover:text-orange-600 bg-orange-50 p-2 rounded-full transition-colors">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            {/* Card 2 */}
-                            <div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 hover:shadow-xl transition-all flex flex-col h-full group">
-                                <div className="h-40 overflow-hidden rounded-2xl mb-4">
-                                    <img src={fufuOkraImg} alt="Fufu & Okra Soup" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-lg font-bold text-gray-900 mb-2">Fufu & Okra Soup (Fish)</h4>
-                                <p className="text-xs text-gray-500 mb-4 line-clamp-2 leading-relaxed">Light Fufu served with fresh Okra soup and tilapia fish.</p>
-                                <div className="mt-auto flex justify-between items-center">
-                                    <span className="font-bold text-chuks-orange">N3,500</span>
-                                    <button className="text-chuks-orange hover:text-orange-600 bg-orange-50 p-2 rounded-full transition-colors">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            {/* Card 3 */}
-                            <div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 hover:shadow-xl transition-all flex flex-col h-full group">
-                                <div className="h-40 overflow-hidden rounded-2xl mb-4">
-                                    <img src={fufuOkraImg} alt="Fufu & Okra Soup" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                </div>
-                                <h4 className="text-lg font-bold text-gray-900 mb-2">Fufu & Okra Soup (Fish)</h4>
-                                <p className="text-xs text-gray-500 mb-4 line-clamp-2 leading-relaxed">Light Fufu served with fresh Okra soup and tilapia fish.</p>
-                                <div className="mt-auto flex justify-between items-center">
-                                    <span className="font-bold text-chuks-orange">N3,500</span>
-                                    <button className="text-chuks-orange hover:text-orange-600 bg-orange-50 p-2 rounded-full transition-colors">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                        </section>
+                    ))}
                 </div>
             </main>
 
