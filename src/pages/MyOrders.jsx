@@ -3,7 +3,7 @@ import jollofChickenImg from '../assets/menu/jollof rice and chicken.svg';
 import ebaEgusiImg from '../assets/menu/eba & egusi.svg';
 import pepperedSnailImg from '../assets/menu/peppered snail.svg';
 
-const MyOrders = ({ onLoginClick, onHomeClick, onExploreClick, cartItems, onUpdateQuantity, onRemoveItem }) => {
+const MyOrders = ({ onLoginClick, onHomeClick, onExploreClick, cartItems, onUpdateQuantity, onRemoveItem, onProceedToSummary }) => {
 
     return (
         <div className="flex flex-col min-h-screen bg-[#F9F9F9] font-inter">
@@ -91,12 +91,29 @@ const MyOrders = ({ onLoginClick, onHomeClick, onExploreClick, cartItems, onUpda
                 </div>
 
                 {/* Add more items link */}
-                <button
-                    onClick={onExploreClick}
-                    className="flex items-center text-blue-500 font-medium hover:underline text-sm"
-                >
-                    <span className="mr-2 text-xl">+</span> Add more items from Chuks Kitchen
-                </button>
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-t border-gray-100 pt-8 mt-4">
+                    <button
+                        onClick={onExploreClick}
+                        className="flex items-center text-blue-500 font-medium hover:underline text-sm"
+                    >
+                        <span className="mr-2 text-xl">+</span> Add more items from Chuks Kitchen
+                    </button>
+
+                    <div className="flex flex-col items-end gap-4">
+                        <div className="flex items-center gap-8">
+                            <span className="text-gray-500 font-medium">Subtotal</span>
+                            <span className="text-3xl font-bold text-gray-900">
+                                ₦{cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0).toLocaleString()}
+                            </span>
+                        </div>
+                        <button
+                            onClick={onProceedToSummary}
+                            className="bg-chuks-orange text-white px-12 py-4 rounded-xl font-bold text-base hover:bg-orange-600 transition-all shadow-lg active:scale-95 whitespace-nowrap"
+                        >
+                            Proceed to Order Summary
+                        </button>
+                    </div>
+                </div>
             </main>
 
             {/* Footer Section */}
