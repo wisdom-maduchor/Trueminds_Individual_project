@@ -7,6 +7,7 @@ import Menu from './pages/Menu';
 import FoodDetail from './pages/FoodDetail';
 import MyOrders from './pages/MyOrders';
 import OrderSummary from './pages/OrderSummary';
+import DeliveryDetails from './pages/DeliveryDetails';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('onboarding');
@@ -20,6 +21,7 @@ function App() {
   const navigateToMenu = () => setCurrentPage('menu');
   const navigateToMyOrders = () => setCurrentPage('myOrders');
   const navigateToOrderSummary = () => setCurrentPage('orderSummary');
+  const navigateToDeliveryDetails = () => setCurrentPage('deliveryDetails');
   const navigateToFoodDetail = (food) => {
     setSelectedFood(food);
     setCurrentPage('foodDetail');
@@ -123,6 +125,15 @@ function App() {
           onHomeClick={navigateToHome}
           onExploreClick={navigateToMenu}
           onBackToCart={navigateToMyOrders}
+          onProceedToDelivery={navigateToDeliveryDetails}
+        />
+      )}
+      {currentPage === 'deliveryDetails' && (
+        <DeliveryDetails
+          onLoginClick={navigateToLogin}
+          onHomeClick={navigateToHome}
+          onExploreClick={navigateToMenu}
+          onBackToSummary={navigateToOrderSummary}
         />
       )}
     </div>
