@@ -3,7 +3,7 @@ import jollofChickenImg from '../assets/menu/jollof rice and chicken.svg';
 import ebaEgusiImg from '../assets/menu/eba & egusi.svg';
 import pepperedSnailImg from '../assets/menu/peppered snail.svg';
 
-const MyOrders = ({ onLoginClick, onHomeClick, onExploreClick, cartItems, onUpdateQuantity, onRemoveItem, onProceedToSummary }) => {
+const MyOrders = ({ onLoginClick, onHomeClick, onExploreClick, cartItems, onUpdateQuantity, onRemoveItem, onProceedToSummary, onAccountClick }) => {
 
     return (
         <div className="flex flex-col min-h-screen bg-[#F9F9F9] font-inter">
@@ -20,7 +20,7 @@ const MyOrders = ({ onLoginClick, onHomeClick, onExploreClick, cartItems, onUpda
                         <button onClick={onHomeClick} className="hover:text-chuks-orange transition-colors">Home</button>
                         <button onClick={onExploreClick} className="hover:text-chuks-orange transition-colors">Explore</button>
                         <button className="text-chuks-orange">My Orders</button>
-                        <button className="hover:text-chuks-orange transition-colors">Account</button>
+                        <button onClick={onAccountClick} className="hover:text-chuks-orange transition-colors">Account</button>
                     </nav>
                 </div>
                 <button
@@ -131,7 +131,7 @@ const MyOrders = ({ onLoginClick, onHomeClick, onExploreClick, cartItems, onUpda
                             <li><button onClick={onHomeClick} className="hover:text-white transition-colors">Home</button></li>
                             <li><button onClick={onExploreClick} className="hover:text-white transition-colors">Explore</button></li>
                             <li><button className="hover:text-white transition-colors">My Order</button></li>
-                            <li><button className="hover:text-white transition-colors">Account</button></li>
+                            <li><button onClick={onAccountClick} className="hover:text-white transition-colors">Account</button></li>
                             <li><button className="hover:text-white transition-colors">Contact</button></li>
                         </ul>
                     </div>

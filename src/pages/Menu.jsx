@@ -252,7 +252,7 @@ const FoodCard = ({ item, onSelect, onAddToCart, onMyOrdersClick }) => (
 );
 
 // ─── Menu page ────────────────────────────────────────────────────────────────
-const Menu = ({ onLoginClick, onHomeClick, onFoodSelect, onMyOrdersClick, onAddToCart }) => {
+const Menu = ({ onLoginClick, onHomeClick, onFoodSelect, onMyOrdersClick, onAddToCart, onAccountClick }) => {
     const [selectedCategory, setSelectedCategory] = useState('Popular');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -285,7 +285,7 @@ const Menu = ({ onLoginClick, onHomeClick, onFoodSelect, onMyOrdersClick, onAddT
                         >
                             My Orders
                         </button>
-                        <button className="hover:text-chuks-orange transition-colors">Account</button>
+                        <button onClick={onAccountClick} className="hover:text-chuks-orange transition-colors">Account</button>
                     </nav>
                 </div>
                 <button
@@ -401,7 +401,7 @@ const Menu = ({ onLoginClick, onHomeClick, onFoodSelect, onMyOrdersClick, onAddT
                             <li><button onClick={onHomeClick} className="hover:text-white transition-colors">Home</button></li>
                             <li><button className="text-white">Explore</button></li>
                             <li><button onClick={onMyOrdersClick} className="hover:text-white transition-colors">My Order</button></li>
-                            <li><button className="hover:text-white transition-colors">Account</button></li>
+                            <li><button onClick={onAccountClick} className="hover:text-white transition-colors">Account</button></li>
                             <li><button className="hover:text-white transition-colors">Contact</button></li>
                         </ul>
                     </div>

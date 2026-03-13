@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const FoodDetail = ({ food, onClose, onLoginClick, onMyOrdersClick, onHomeClick, onExploreClick, onAddToCart }) => {
+const FoodDetail = ({ food, onClose, onLoginClick, onMyOrdersClick, onHomeClick, onExploreClick, onAddToCart, onAccountClick }) => {
     const [selectedProtein, setSelectedProtein] = useState(food.proteins?.[0]?.label || '');
     const [selectedSides, setSelectedSides] = useState([]);
     const [specialInstructions, setSpecialInstructions] = useState('');
@@ -62,7 +62,7 @@ const FoodDetail = ({ food, onClose, onLoginClick, onMyOrdersClick, onHomeClick,
                         >
                             My Orders
                         </button>
-                        <button className="hover:text-chuks-orange transition-colors">Account</button>
+                        <button onClick={onAccountClick} className="hover:text-chuks-orange transition-colors">Account</button>
                     </nav>
                 </div>
                 <button
@@ -244,7 +244,7 @@ const FoodDetail = ({ food, onClose, onLoginClick, onMyOrdersClick, onHomeClick,
                             <li><button onClick={onHomeClick} className="hover:text-white transition-colors">Home</button></li>
                             <li><button onClick={onExploreClick} className="hover:text-white transition-colors">Explore</button></li>
                             <li><button onClick={onMyOrdersClick} className="hover:text-white transition-colors">My Order</button></li>
-                            <li><button className="hover:text-white transition-colors">Account</button></li>
+                            <li><button onClick={onAccountClick} className="hover:text-white transition-colors">Account</button></li>
                             <li><button className="hover:text-white transition-colors">Contact</button></li>
                         </ul>
                     </div>

@@ -8,6 +8,7 @@ import FoodDetail from './pages/FoodDetail';
 import MyOrders from './pages/MyOrders';
 import OrderSummary from './pages/OrderSummary';
 import DeliveryDetails from './pages/DeliveryDetails';
+import Payment from './pages/Payment';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('onboarding');
@@ -22,6 +23,7 @@ function App() {
   const navigateToMyOrders = () => setCurrentPage('myOrders');
   const navigateToOrderSummary = () => setCurrentPage('orderSummary');
   const navigateToDeliveryDetails = () => setCurrentPage('deliveryDetails');
+  const navigateToPayment = () => setCurrentPage('payment');
   const navigateToFoodDetail = (food) => {
     setSelectedFood(food);
     setCurrentPage('foodDetail');
@@ -71,6 +73,7 @@ function App() {
           onLoginClick={navigateToLogin}
           onExploreClick={navigateToMenu}
           onMyOrdersClick={navigateToMyOrders}
+          onAccountClick={navigateToPayment}
           onHomeClick={navigateToHome}
           onAddToCart={addToCart}
         />
@@ -93,6 +96,7 @@ function App() {
           onHomeClick={navigateToHome}
           onFoodSelect={navigateToFoodDetail}
           onMyOrdersClick={navigateToMyOrders}
+          onAccountClick={navigateToPayment}
           onAddToCart={addToCart}
         />
       )}
@@ -102,6 +106,7 @@ function App() {
           onClose={navigateToMenu}
           onLoginClick={navigateToLogin}
           onMyOrdersClick={navigateToMyOrders}
+          onAccountClick={navigateToPayment}
           onHomeClick={navigateToHome}
           onExploreClick={navigateToMenu}
           onAddToCart={addToCart}
@@ -112,6 +117,7 @@ function App() {
           onLoginClick={navigateToLogin}
           onHomeClick={navigateToHome}
           onExploreClick={navigateToMenu}
+          onAccountClick={navigateToPayment}
           onProceedToSummary={navigateToOrderSummary}
           cartItems={cart}
           onUpdateQuantity={updateCartQuantity}
@@ -124,6 +130,7 @@ function App() {
           onLoginClick={navigateToLogin}
           onHomeClick={navigateToHome}
           onExploreClick={navigateToMenu}
+          onAccountClick={navigateToPayment}
           onBackToCart={navigateToMyOrders}
           onProceedToDelivery={navigateToDeliveryDetails}
         />
@@ -133,7 +140,19 @@ function App() {
           onLoginClick={navigateToLogin}
           onHomeClick={navigateToHome}
           onExploreClick={navigateToMenu}
+          onAccountClick={navigateToPayment}
           onBackToSummary={navigateToOrderSummary}
+          onProceedToPayment={navigateToPayment}
+        />
+      )}
+      {currentPage === 'payment' && (
+        <Payment
+          cartItems={cart}
+          onLoginClick={navigateToLogin}
+          onHomeClick={navigateToHome}
+          onExploreClick={navigateToMenu}
+          onAccountClick={navigateToPayment}
+          onBackToDelivery={navigateToDeliveryDetails}
         />
       )}
     </div>

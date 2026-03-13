@@ -10,7 +10,7 @@ import egusiFufuImg from '../assets/Home-images/egusi-fufu.svg';
 import ricePlantainImg from '../assets/Home-images/rice-plantain.svg';
 import promoImg from '../assets/Home-images/home-img.png';
 
-const Home = ({ onLoginClick, onExploreClick, onMyOrdersClick, onHomeClick, onAddToCart }) => {
+const Home = ({ onLoginClick, onExploreClick, onMyOrdersClick, onHomeClick, onAddToCart, onAccountClick }) => {
     const categories = [
         { name: 'Jollof Delights', img: jollofImg },
         { name: 'Swallow & Soups', img: swallowImg },
@@ -49,7 +49,7 @@ const Home = ({ onLoginClick, onExploreClick, onMyOrdersClick, onHomeClick, onAd
                         >
                             My Orders
                         </button>
-                        <button className="hover:text-chuks-orange transition-colors">Account</button>
+                        <button onClick={onAccountClick} className="hover:text-chuks-orange transition-colors">Account</button>
                     </nav>
                 </div>
                 <button
@@ -177,7 +177,7 @@ const Home = ({ onLoginClick, onExploreClick, onMyOrdersClick, onHomeClick, onAd
                             <li><button onClick={onHomeClick} className="hover:text-white transition-colors">Home</button></li>
                             <li><button onClick={onExploreClick} className="hover:text-white transition-colors">Explore</button></li>
                             <li><button onClick={onMyOrdersClick} className="hover:text-white transition-colors">My Order</button></li>
-                            <li><button className="hover:text-white transition-colors">Account</button></li>
+                            <li><button onClick={onAccountClick} className="hover:text-white transition-colors">Account</button></li>
                             <li><button className="hover:text-white transition-colors">Contact</button></li>
                         </ul>
                     </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const OrderSummary = ({ cartItems, onLoginClick, onHomeClick, onExploreClick, onBackToCart, onProceedToDelivery }) => {
+const OrderSummary = ({ cartItems, onLoginClick, onHomeClick, onExploreClick, onBackToCart, onProceedToDelivery, onAccountClick }) => {
     const [deliveryType, setDeliveryType] = useState('delivery');
     const [promoCode, setPromoCode] = useState('');
     const [specialInstructions, setSpecialInstructions] = useState('');
@@ -26,7 +26,7 @@ const OrderSummary = ({ cartItems, onLoginClick, onHomeClick, onExploreClick, on
                         <button onClick={onHomeClick} className="hover:text-chuks-orange transition-colors">Home</button>
                         <button onClick={onExploreClick} className="hover:text-chuks-orange transition-colors">Explore</button>
                         <button onClick={onBackToCart} className="text-chuks-orange">My Orders</button>
-                        <button className="hover:text-chuks-orange transition-colors">Account</button>
+                        <button onClick={onAccountClick} className="hover:text-chuks-orange transition-colors">Account</button>
                     </nav>
                 </div>
                 <button
@@ -53,7 +53,7 @@ const OrderSummary = ({ cartItems, onLoginClick, onHomeClick, onExploreClick, on
                                 className="flex-1 border border-gray-200 rounded-xl px-6 py-4 text-sm focus:outline-none focus:border-chuks-orange transition-colors"
                             />
                             <button className="bg-chuks-orange text-white px-12 py-4 rounded-xl font-bold text-sm hover:bg-orange-600 transition-all shadow-md active:scale-95">
-                                Login
+                                Apply
                             </button>
                         </div>
                     </div>
@@ -133,7 +133,7 @@ const OrderSummary = ({ cartItems, onLoginClick, onHomeClick, onExploreClick, on
                             <li><button onClick={onHomeClick} className="hover:text-white transition-colors">Home</button></li>
                             <li><button onClick={onExploreClick} className="hover:text-white transition-colors">Explore</button></li>
                             <li><button onClick={onBackToCart} className="hover:text-white transition-colors">My Order</button></li>
-                            <li><button className="hover:text-white transition-colors">Account</button></li>
+                            <li><button onClick={onAccountClick} className="hover:text-white transition-colors">Account</button></li>
                             <li><button className="hover:text-white transition-colors">Contact</button></li>
                         </ul>
                     </div>

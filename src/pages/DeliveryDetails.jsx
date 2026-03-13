@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const DeliveryDetails = ({ onLoginClick, onHomeClick, onExploreClick, onBackToSummary }) => {
+const DeliveryDetails = ({ onLoginClick, onHomeClick, onExploreClick, onBackToSummary, onProceedToPayment }) => {
     const [deliveryTime, setDeliveryTime] = useState('ASAP(30-25)');
     const [instructions, setInstructions] = useState('');
     const [contactAddress, setContactAddress] = useState('+234 801 234 5678');
@@ -20,7 +20,7 @@ const DeliveryDetails = ({ onLoginClick, onHomeClick, onExploreClick, onBackToSu
                         <button onClick={onHomeClick} className="hover:text-chuks-orange transition-colors">Home</button>
                         <button onClick={onExploreClick} className="hover:text-chuks-orange transition-colors">Explore</button>
                         <button onClick={onBackToSummary} className="text-chuks-orange">My Orders</button>
-                        <button className="hover:text-chuks-orange transition-colors">Account</button>
+                        <button onClick={onAccountClick} className="hover:text-chuks-orange transition-colors">Account</button>
                     </nav>
                 </div>
                 <button
@@ -80,6 +80,13 @@ const DeliveryDetails = ({ onLoginClick, onHomeClick, onExploreClick, onBackToSu
                             className="w-full border border-gray-200 rounded-xl px-6 py-4 text-sm focus:outline-none focus:border-chuks-orange transition-colors"
                         />
                     </div>
+
+                    <button
+                        onClick={onProceedToPayment}
+                        className="w-full bg-chuks-orange text-white py-5 rounded-xl font-bold text-lg hover:bg-orange-600 transition-all shadow-lg active:scale-95"
+                    >
+                        Proceed to Payment
+                    </button>
                 </div>
             </main>
 
@@ -98,7 +105,7 @@ const DeliveryDetails = ({ onLoginClick, onHomeClick, onExploreClick, onBackToSu
                             <li><button onClick={onHomeClick} className="hover:text-white transition-colors">Home</button></li>
                             <li><button onClick={onExploreClick} className="hover:text-white transition-colors">Explore</button></li>
                             <li><button onClick={onBackToSummary} className="hover:text-white transition-colors">My Order</button></li>
-                            <li><button className="hover:text-white transition-colors">Account</button></li>
+                            <li><button onClick={onAccountClick} className="hover:text-white transition-colors">Account</button></li>
                             <li><button className="hover:text-white transition-colors">Contact</button></li>
                         </ul>
                     </div>
