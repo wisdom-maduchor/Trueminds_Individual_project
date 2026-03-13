@@ -23,12 +23,19 @@ const MyOrders = ({ onLoginClick, onHomeClick, onExploreClick, cartItems, onUpda
                         <button onClick={onAccountClick} className="hover:text-chuks-orange transition-colors">Account</button>
                     </nav>
                 </div>
-                <button
-                    onClick={onLoginClick}
-                    className="bg-chuks-orange text-white px-8 py-2.5 rounded-xl font-semibold text-sm hover:bg-orange-600 transition-all shadow-md active:scale-95"
-                >
-                    Login
-                </button>
+                <div className="flex items-center space-x-4">
+                    <button
+                        onClick={onLoginClick}
+                        className="hidden md:block bg-chuks-orange text-white px-8 py-2.5 rounded-xl font-semibold text-sm hover:bg-orange-600 transition-all shadow-md active:scale-95"
+                    >
+                        Login
+                    </button>
+                    <button className="md:hidden p-2 hover:bg-gray-50 rounded-lg transition-colors">
+                        <svg className="w-8 h-8 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
             </header>
 
             {/* Main Content Area */}

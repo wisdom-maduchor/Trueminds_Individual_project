@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
 
-const Payment = ({ cartItems, onLoginClick, onHomeClick, onExploreClick, onBackToDelivery }) => {
+const Payment = ({ cartItems, onLoginClick, onHomeClick, onExploreClick, onBackToDelivery, onAccountClick, onPaymentSuccess }) => {
     const [paymentMethod, setPaymentMethod] = useState('card');
     const [cardNumber, setCardNumber] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
     const [cvv, setCvv] = useState('');
     const [saveCard, setSaveCard] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handlePay = () => {
+        setIsLoading(true);
+        // Simulate payment processing
+        setTimeout(() => {
+            setIsLoading(false);
+            if (onPaymentSuccess) {
+                onPaymentSuccess();
+            }
+        }, 3000);
+    };
 
     const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
     const deliveryFee = 500; // Assuming standard delivery fee from summary
@@ -13,7 +25,18 @@ const Payment = ({ cartItems, onLoginClick, onHomeClick, onExploreClick, onBackT
     const total = subtotal + deliveryFee + serviceFee;
 
     return (
-        <div className="flex flex-col min-h-screen bg-[#F9F9F9] font-inter">
+        <div className="flex flex-col min-h-screen bg-[#F9F9F9] font-inter relative">
+            {/* Loader Overlay */}
+            {isLoading && (
+                <div className="fixed inset-0 z-[100] bg-white/90 backdrop-blur-sm flex items-center justify-center">
+                    <div className="radial-loader">
+                        <div></div><div></div><div></div><div></div>
+                        <div></div><div></div><div></div><div></div>
+                        <div></div><div></div><div></div><div></div>
+                    </div>
+                </div>
+            )}
+
             {/* Top Navigation */}
             <header className="bg-white px-6 md:px-24 py-4 flex items-center justify-between sticky top-0 z-50 border-b border-gray-100">
                 <div className="flex items-center space-x-12">
@@ -27,15 +50,22 @@ const Payment = ({ cartItems, onLoginClick, onHomeClick, onExploreClick, onBackT
                         <button onClick={onHomeClick} className="hover:text-chuks-orange transition-colors">Home</button>
                         <button onClick={onExploreClick} className="hover:text-chuks-orange transition-colors">Explore</button>
                         <button onClick={onBackToDelivery} className="text-chuks-orange">My Orders</button>
-                        <button className="hover:text-chuks-orange transition-colors">Account</button>
+                        <button onClick={onAccountClick} className="hover:text-chuks-orange transition-colors">Account</button>
                     </nav>
                 </div>
-                <button
-                    onClick={onLoginClick}
-                    className="bg-chuks-orange text-white px-8 py-2.5 rounded-xl font-semibold text-sm hover:bg-orange-600 transition-all shadow-md active:scale-95"
-                >
-                    Login
-                </button>
+                <div className="flex items-center space-x-4">
+                    <button
+                        onClick={onLoginClick}
+                        className="hidden md:block bg-chuks-orange text-white px-8 py-2.5 rounded-xl font-semibold text-sm hover:bg-orange-600 transition-all shadow-md active:scale-95"
+                    >
+                        Login
+                    </button>
+                    <button className="md:hidden p-2 hover:bg-gray-50 rounded-lg transition-colors">
+                        <svg className="w-8 h-8 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
             </header>
 
             {/* Main Content Area */}
@@ -156,8 +186,12 @@ const Payment = ({ cartItems, onLoginClick, onHomeClick, onExploreClick, onBackT
                         </label>
                     </div>
 
-                    <button className="w-full bg-chuks-orange text-white py-5 rounded-xl font-bold text-lg hover:bg-orange-600 transition-all shadow-lg active:scale-95 mb-6">
-                        Pay ₦{total.toLocaleString()}
+                    <button
+                        onClick={handlePay}
+                        disabled={isLoading}
+                        className={`w-full bg-chuks-orange text-white py-5 rounded-xl font-bold text-lg transition-all shadow-lg active:scale-95 mb-6 ${isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-orange-600'}`}
+                    >
+                        {isLoading ? 'Processing...' : `Pay ₦${total.toLocaleString()}`}
                     </button>
 
                     <p className="text-xs text-gray-400 text-center leading-relaxed max-w-lg mx-auto">
@@ -181,7 +215,7 @@ const Payment = ({ cartItems, onLoginClick, onHomeClick, onExploreClick, onBackT
                             <li><button onClick={onHomeClick} className="hover:text-white transition-colors">Home</button></li>
                             <li><button onClick={onExploreClick} className="hover:text-white transition-colors">Explore</button></li>
                             <li><button onClick={onBackToDelivery} className="hover:text-white transition-colors">My Order</button></li>
-                            <li><button className="hover:text-white transition-colors">Account</button></li>
+                            <li><button onClick={onAccountClick} className="hover:text-white transition-colors">Account</button></li>
                             <li><button className="hover:text-white transition-colors">Contact</button></li>
                         </ul>
                     </div>

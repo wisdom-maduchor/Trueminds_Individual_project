@@ -9,6 +9,7 @@ import MyOrders from './pages/MyOrders';
 import OrderSummary from './pages/OrderSummary';
 import DeliveryDetails from './pages/DeliveryDetails';
 import Payment from './pages/Payment';
+import Success from './pages/Success';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('onboarding');
@@ -24,6 +25,7 @@ function App() {
   const navigateToOrderSummary = () => setCurrentPage('orderSummary');
   const navigateToDeliveryDetails = () => setCurrentPage('deliveryDetails');
   const navigateToPayment = () => setCurrentPage('payment');
+  const navigateToSuccess = () => setCurrentPage('success');
   const navigateToFoodDetail = (food) => {
     setSelectedFood(food);
     setCurrentPage('foodDetail');
@@ -153,6 +155,17 @@ function App() {
           onExploreClick={navigateToMenu}
           onAccountClick={navigateToPayment}
           onBackToDelivery={navigateToDeliveryDetails}
+          onPaymentSuccess={navigateToSuccess}
+        />
+      )}
+      {currentPage === 'success' && (
+        <Success
+          onLoginClick={navigateToLogin}
+          onHomeClick={navigateToHome}
+          onExploreClick={navigateToMenu}
+          onMyOrdersClick={navigateToMyOrders}
+          onAccountClick={navigateToPayment}
+          onTrackOrder={() => alert('Order tracking feature coming soon!')}
         />
       )}
     </div>
