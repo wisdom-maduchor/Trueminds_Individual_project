@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-const OrderSummary = ({ cartItems, onLoginClick, onHomeClick, onExploreClick, onBackToCart, onProceedToDelivery, onAccountClick }) => {
-    const [deliveryType, setDeliveryType] = useState('delivery');
+const OrderSummary = ({ cartItems, deliveryType, setDeliveryType, onLoginClick, onHomeClick, onExploreClick, onBackToCart, onProceedToDelivery, onProceedToPayment, onAccountClick }) => {
     const [promoCode, setPromoCode] = useState('');
     const [specialInstructions, setSpecialInstructions] = useState('');
 
@@ -117,7 +116,7 @@ const OrderSummary = ({ cartItems, onLoginClick, onHomeClick, onExploreClick, on
                     </div>
 
                     <button
-                        onClick={onProceedToDelivery}
+                        onClick={() => deliveryType === 'pickup' ? onProceedToPayment() : onProceedToDelivery()}
                         className="w-full bg-chuks-orange text-white py-5 rounded-xl font-bold text-base hover:bg-orange-600 transition-all shadow-lg active:scale-95"
                     >
                         Proceed to Checkout

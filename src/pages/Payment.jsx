@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Payment = ({ cartItems, onLoginClick, onHomeClick, onExploreClick, onBackToDelivery, onAccountClick, onPaymentSuccess }) => {
+const Payment = ({ cartItems, deliveryType = 'delivery', onLoginClick, onHomeClick, onExploreClick, onBackToDelivery, onAccountClick, onPaymentSuccess }) => {
     const [paymentMethod, setPaymentMethod] = useState('card');
     const [cardNumber, setCardNumber] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
@@ -20,7 +20,7 @@ const Payment = ({ cartItems, onLoginClick, onHomeClick, onExploreClick, onBackT
     };
 
     const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-    const deliveryFee = 500; // Assuming standard delivery fee from summary
+    const deliveryFee = deliveryType === 'pickup' ? 0 : 500;
     const serviceFee = 200;
     const total = subtotal + deliveryFee + serviceFee;
 

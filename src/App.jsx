@@ -15,6 +15,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState('onboarding');
   const [selectedFood, setSelectedFood] = useState(null);
   const [cart, setCart] = useState([]);
+  const [deliveryType, setDeliveryType] = useState('delivery');
 
   const navigateToLogin = () => setCurrentPage('login');
   const navigateToHome = () => setCurrentPage('home');
@@ -129,12 +130,15 @@ function App() {
       {currentPage === 'orderSummary' && (
         <OrderSummary
           cartItems={cart}
+          deliveryType={deliveryType}
+          setDeliveryType={setDeliveryType}
           onLoginClick={navigateToLogin}
           onHomeClick={navigateToHome}
           onExploreClick={navigateToMenu}
           onAccountClick={navigateToPayment}
           onBackToCart={navigateToMyOrders}
           onProceedToDelivery={navigateToDeliveryDetails}
+          onProceedToPayment={navigateToPayment}
         />
       )}
       {currentPage === 'deliveryDetails' && (
@@ -150,6 +154,7 @@ function App() {
       {currentPage === 'payment' && (
         <Payment
           cartItems={cart}
+          deliveryType={deliveryType}
           onLoginClick={navigateToLogin}
           onHomeClick={navigateToHome}
           onExploreClick={navigateToMenu}
