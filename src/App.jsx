@@ -69,6 +69,10 @@ function App() {
         <Onboarding
           onStartOrder={navigateToHome}
           onSignIn={navigateToLogin}
+          onHomeClick={navigateToHome}
+          onExploreClick={navigateToMenu}
+          onMyOrdersClick={navigateToMyOrders}
+          onAccountClick={navigateToPayment}
         />
       )}
       {currentPage === 'home' && (
@@ -85,12 +89,19 @@ function App() {
         <Login
           onBackClick={navigateToOnboarding}
           onSignupClick={navigateToSignup}
+          onHomeClick={navigateToHome}
+          onExploreClick={navigateToMenu}
+          onMyOrdersClick={navigateToMyOrders}
+          onAccountClick={navigateToPayment}
         />
       )}
       {currentPage === 'signup' && (
         <Signup
           onSignInClick={navigateToLogin}
           onHomeClick={navigateToHome}
+          onExploreClick={navigateToMenu}
+          onMyOrdersClick={navigateToMyOrders}
+          onAccountClick={navigateToPayment}
         />
       )}
       {currentPage === 'menu' && (
