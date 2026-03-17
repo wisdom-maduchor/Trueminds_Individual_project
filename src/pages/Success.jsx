@@ -50,7 +50,7 @@ const Success = ({ onLoginClick, onHomeClick, onTrackOrder, onExploreClick, onMy
 
                     <h2 className="text-xl font-bold text-gray-900 mb-2">Order Placed Successfully!</h2>
                     <p className="text-gray-600 mb-10 text-sm">
-                        Your delicious Chuks Kitchen meal is on its way!
+                        Your delicious Lilian's Kitchen meal is on its way!
                     </p>
 
                     {/* Central Animation Area */}

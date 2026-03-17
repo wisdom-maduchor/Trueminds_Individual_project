@@ -17,7 +17,7 @@ const Login = ({ onBackClick, onSignupClick, onHomeClick, onExploreClick, onMyOr
                         className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-[#FF7A1B]/70 flex flex-col items-center justify-center text-white px-12 text-center">
-                        <h1 className="text-5xl font-pacifico mb-8">Chuks Kitchen</h1>
+                        <h1 className="text-5xl font-pacifico italic mb-8">Lilian's Kitchen</h1>
                         <p className="text-xl max-w-sm leading-relaxed">
                             Your journey to delicious, authentic Nigerian meals starts here. Sign up or log in to order your favorites today!
                         </p>
@@ -28,7 +28,7 @@ const Login = ({ onBackClick, onSignupClick, onHomeClick, onExploreClick, onMyOr
                 <div className="w-full md:w-1/2 flex flex-col items-center justify-center px-6 md:px-16 py-8 md:py-12 bg-[#F5F7FA]">
                     <div className="w-full max-w-md rounded-2xl">
                         <div className="text-center mb-3">
-                            <h1 className="text-2xl font-pacifico text-chuks-orange mb-2">Chuks Kitchen</h1>
+                            <h1 className="text-2xl font-pacifico italic text-chuks-orange mb-2">Lilian's Kitchen</h1>
                             <h2 className="text-2xl font-bold text-gray-900">Login your Account</h2>
                         </div>
 

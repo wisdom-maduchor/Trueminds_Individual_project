@@ -108,6 +108,7 @@ function App() {
         <Menu
           onLoginClick={navigateToLogin}
           onHomeClick={navigateToHome}
+          onExploreClick={navigateToMenu}
           onFoodSelect={navigateToFoodDetail}
           onMyOrdersClick={navigateToMyOrders}
           onAccountClick={navigateToPayment}

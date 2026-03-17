@@ -2,17 +2,17 @@ import React from 'react';
 
 const Footer = ({ onHomeClick, onExploreClick, onMyOrdersClick, onAccountClick }) => {
     return (
-        <footer className="bg-dark-brown text-white py-20 px-6 md:px-24 mt-auto">
+        <footer className="bg-dark-brown text-white py-12 px-6 md:px-24 mt-auto">
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-16">
                 <div>
-                    <h2 className="text-2xl font-pacifico text-chuks-orange mb-8">Chuks Kitchen</h2>
-                    <p className="text-gray-400 leading-relaxed text-sm">
-                        Bringing the authentic flavors of Nigerian home cooking to your table, with passion and care.
+                    <h2 className="text-2xl font-pacifico italic text-chuks-orange mb-4">Lilian's Kitchen</h2>
+                    <p className="text-white leading-relaxed text-lg">
+                        Bringing the authentic <br /> flavors of Nigerian <br /> home cooking to your <br /> table, with passion <br /> and care.
                     </p>
                 </div>
                 <div>
-                    <h3 className="text-lg font-bold mb-8">Quick Links</h3>
-                    <ul className="space-y-4 text-gray-400 text-sm">
+                    <h3 className="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul className="space-y-4 text-gray-400 text-xs">
                         <li><button onClick={onHomeClick} className="hover:text-white transition-colors">Home</button></li>
                         <li><button onClick={onExploreClick} className="hover:text-white transition-colors">Explore</button></li>
                         <li><button onClick={onMyOrdersClick} className="hover:text-white transition-colors">My Order</button></li>
@@ -21,16 +21,16 @@ const Footer = ({ onHomeClick, onExploreClick, onMyOrdersClick, onAccountClick }
                     </ul>
                 </div>
                 <div>
-                    <h3 className="text-lg font-bold mb-8">Contact Us</h3>
-                    <ul className="space-y-4 text-gray-400 text-sm">
+                    <h3 className="text-lg font-bold mb-4">Contact Us</h3>
+                    <ul className="space-y-4 text-gray-400 text-xs">
                         <li>+234 801 234 5678</li>
                         <li>hello@chukskitchen.com</li>
                         <li>123 Taste Blvd, Lagos, Nigeria.</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 className="text-lg font-bold mb-8">Follow Us</h3>
-                    <ul className="space-y-4 text-gray-400 text-sm">
+                    <h3 className="text-lg font-bold mb-4">Follow Us</h3>
+                    <ul className="space-y-4 text-gray-400 text-xs">
                         <li><a href="#" className="hover:text-white transition-colors">Facebook</a></li>
                         <li><a href="#" className="hover:text-white transition-colors">Twitter</a></li>
                         <li><a href="#" className="hover:text-white transition-colors">LinkedIn</a></li>
@@ -38,7 +38,7 @@ const Footer = ({ onHomeClick, onExploreClick, onMyOrdersClick, onAccountClick }
                     </ul>
                 </div>
             </div>
-            <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="max-w-7xl mx-auto mt-10 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-6">
                 <p className="text-xs text-gray-600">© 2020 Lift Media. All rights reserved.</p>
                 <button
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

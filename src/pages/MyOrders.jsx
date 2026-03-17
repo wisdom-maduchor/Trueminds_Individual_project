@@ -84,7 +84,7 @@ const MyOrders = ({ onLoginClick, onHomeClick, onExploreClick, cartItems, onUpda
                         onClick={onExploreClick}
                         className="flex items-center text-blue-500 font-medium hover:underline text-sm"
                     >
-                        <span className="mr-2 text-xl">+</span> Add more items from Chuks Kitchen
+                        <span className="mr-2 text-xl">+</span> Add more items from Lilian's Kitchen
                     </button>
 
                     <div className="flex flex-col items-end gap-4">

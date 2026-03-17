@@ -12,10 +12,10 @@ const Header = ({
         <header className="bg-white px-6 md:px-24 py-4 flex items-center justify-between sticky top-0 z-50 border-b border-gray-100">
             <div className="flex items-center space-x-12">
                 <h1
-                    className="text-2xl font-pacifico text-chuks-orange cursor-pointer"
+                    className="text-2xl font-pacifico italic text-chuks-orange cursor-pointer"
                     onClick={onHomeClick}
                 >
-                    Chuks Kitchen
+                    Lilian's Kitchen
                 </h1>
                 <nav className="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
                     <button

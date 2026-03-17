@@ -254,7 +254,7 @@ const FoodCard = ({ item, onSelect, onAddToCart, onMyOrdersClick }) => (
 );
 
 // ─── Menu page ────────────────────────────────────────────────────────────────
-const Menu = ({ onLoginClick, onHomeClick, onFoodSelect, onMyOrdersClick, onAddToCart, onAccountClick }) => {
+const Menu = ({ onLoginClick, onHomeClick, onExploreClick, onFoodSelect, onMyOrdersClick, onAddToCart, onAccountClick }) => {
     const [selectedCategory, setSelectedCategory] = useState('Popular');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -284,10 +284,10 @@ const Menu = ({ onLoginClick, onHomeClick, onFoodSelect, onMyOrdersClick, onAddT
                 <img src={homeHero} alt="Menu Hero" className="w-full h-full object-cover object-center" />
                 <div className="absolute inset-0 bg-black/40 flex flex-col justify-end px-6 md:px-24 pb-12">
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-2 tracking-tight">
-                        Chuks Kitchen
+                        Lilian's Kitchen
                     </h2>
                     <p className="text-lg md:text-xl text-gray-200 font-light">
-                        Chuks Kitchen Nigerian Home Cooking 4.8 (12k)
+                        Lilian's Kitchen Nigerian Home Cooking 4.8 (12k)
                     </p>
                 </div>
             </section>

@@ -22,7 +22,7 @@ const Onboarding = ({ onStartOrder, onSignIn, onHomeClick, onExploreClick, onMyO
                 <div className="w-full md:w-1/2 flex flex-col px-6 md:px-16 py-8 md:py-12 relative">
                     {/* Header */}
                     <div className="flex justify-between items-center mb-16">
-                        <h1 className="text-2xl font-pacifico text-chuks-orange">Chuks Kitchen</h1>
+                        <h1 className="text-2xl font-pacifico italic text-chuks-orange">Lilian's Kitchen</h1>
                         <button
                             onClick={onSignIn}
                             className="px-6 py-2 border border-blue-400 text-blue-500 rounded-md hover:bg-blue-50 transition-colors text-sm font-medium"
@@ -81,7 +81,7 @@ const Onboarding = ({ onStartOrder, onSignIn, onHomeClick, onExploreClick, onMyO
 
                     {/* Right Column Bottom Links */}
                     <div className="absolute bottom-8 left-6 md:left-16 flex items-center space-x-4 text-xs text-gray-400 ml-30 mb-12">
-                        <span>© 2024 Chuks Kitchen.</span>
+                        <span>© 2024 Lilian's Kitchen.</span>
                         <a href="#" className="hover:text-gray-600 text-blue-600">Privacy Policy</a>
                         <a href="#" className="hover:text-gray-600 text-blue-600">Terms of Service</a>
                     </div>
