@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import jollofChickenImg from '../assets/menu/jollof rice and chicken.svg';
-import ebaEgusiImg from '../assets/menu/eba & egusi.svg';
-import pepperedSnailImg from '../assets/menu/peppered snail.svg';
+import jollofChickenImg from '../assets/Menu/jollof rice and chicken.svg';
+import ebaEgusiImg from '../assets/Menu/eba & egusi.svg';
+import pepperedSnailImg from '../assets/Menu/peppered snail.svg';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 

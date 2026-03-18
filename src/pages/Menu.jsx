@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import homeHero from '../assets/Home-images/home-img.png';
-import amalaImg from '../assets/menu/Amala eith gbegiri and ewedu.svg';
-import ebaEgusiImg from '../assets/menu/eba & egusi.svg';
-import fufuOkraImg from '../assets/menu/fufu and okra soup.svg';
-import grilledTilapiaImg from '../assets/menu/grilled tilapia.svg';
-import jollofSmokedFishImg from '../assets/menu/jollof and smaoked fish.svg';
-import jollofChickenImg from '../assets/menu/jollof rice and chicken.svg';
-import pepperedSnailImg from '../assets/menu/peppered snail.svg';
-import poundedYamEdikImg from '../assets/menu/pounded yam & edikiakong.svg';
+import amalaImg from '../assets/Menu/Amala eith gbegiri and ewedu.svg';
+import ebaEgusiImg from '../assets/Menu/eba & egusi.svg';
+import fufuOkraImg from '../assets/Menu/fufu and okra soup.svg';
+import grilledTilapiaImg from '../assets/Menu/grilled tilapia.svg';
+import jollofSmokedFishImg from '../assets/Menu/jollof and smaoked fish.svg';
+import jollofChickenImg from '../assets/Menu/jollof rice and chicken.svg';
+import pepperedSnailImg from '../assets/Menu/peppered snail.svg';
+import poundedYamEdikImg from '../assets/Menu/pounded yam & edikiakong.svg';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
