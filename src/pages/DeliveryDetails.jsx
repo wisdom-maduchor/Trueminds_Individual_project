@@ -21,7 +21,14 @@ const DeliveryDetails = ({ onLoginClick, onHomeClick, onExploreClick, onBackToSu
             {/* Main Content Area */}
             <main className="max-w-3xl mx-auto w-full px-6 py-12 flex flex-col">
                 <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-50">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-8">Delivery Details</h2>
+                    <div className="flex items-center gap-4 mb-8">
+                        <button onClick={onBackToSummary} className="p-2 bg-gray-50 text-gray-600 rounded-full hover:bg-gray-100 transition-colors shadow-sm">
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <h2 className="text-3xl font-bold text-gray-900">Delivery Details</h2>
+                    </div>
 
                     {/* Address Box */}
                     <div className="border border-gray-100 rounded-2xl p-6 mb-8 flex justify-between items-start">
