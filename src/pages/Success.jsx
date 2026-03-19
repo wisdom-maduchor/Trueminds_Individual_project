@@ -3,13 +3,23 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 const Success = ({ onLoginClick, onHomeClick, onTrackOrder, onExploreClick, onMyOrdersClick, onAccountClick }) => {
     const [showConfetti, setShowConfetti] = useState(false);
+    const [orderNumber, setOrderNumber] = useState('');
 
     useEffect(() => {
+        // Generate random order ID
+        const generateOrderId = () => {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let id = '';
+            for (let i = 0; i < 13; i++) {
+                id += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return id;
+        };
+        setOrderNumber(generateOrderId());
+
         const timer = setTimeout(() => setShowConfetti(true), 100);
         return () => clearTimeout(timer);
     }, []);
-
-    const orderNumber = "123RGR231567Y";
 
     // Confetti pieces matching the image (stars, circles, squiggles)
     const confettiParticles = [
