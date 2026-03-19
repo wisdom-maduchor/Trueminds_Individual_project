@@ -40,7 +40,7 @@ const Payment = ({ cartItems, deliveryType = 'delivery', onLoginClick, onHomeCli
 
             {/* Top Navigation */}
             <Header
-                activePage="myOrders"
+                activePage="account"
                 onHomeClick={onHomeClick}
                 onExploreClick={onExploreClick}
                 onMyOrdersClick={onBackToDelivery}
