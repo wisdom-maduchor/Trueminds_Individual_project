@@ -43,6 +43,9 @@ const Home = ({ onLoginClick, onExploreClick, onMyOrdersClick, onHomeClick, onAd
                 onLoginClick={onLoginClick}
             />
 
+            {/* RapidBott Widget */}
+            {/* <script async defer src="https://app.rapidbott.cloud/js/widget/tqls2fmqekqy8e2z/float.js"></script> */}
+
             {/* Hero Section */}
             <section className="relative w-full h-[500px] overflow-hidden">
                 <img src={homeHero} alt="Hero" className="w-full h-full object-cover" />
