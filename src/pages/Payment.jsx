@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -15,6 +15,29 @@ const Payment = ({ cartItems, deliveryType = 'delivery', onLoginClick, onHomeCli
     // Bank state
     const [selectedBank, setSelectedBank] = useState('');
     const [accountNumber, setAccountNumber] = useState('');
+    const [accountName, setAccountName] = useState('');
+    const [isVerifying, setIsVerifying] = useState(false);
+
+    // Simulate account name lookup when bank + 10-digit account number are provided
+    useEffect(() => {
+        setAccountName('');
+        if (selectedBank && accountNumber.length === 10) {
+            setIsVerifying(true);
+            const timer = setTimeout(() => {
+                // Simulated name based on last 2 digits for variation
+                const names = [
+                    'Adaeze Okonkwo', 'Emeka Nwosu', 'Fatima Abubakar',
+                    'Chidi Eze', 'Ngozi Obi', 'Tunde Bello',
+                    'Amara Chukwu', 'Segun Adeyemi', 'Blessing Ikenna',
+                    'Kelechi Nnaji',
+                ];
+                const name = names[parseInt(accountNumber.slice(-2)) % names.length];
+                setAccountName(name);
+                setIsVerifying(false);
+            }, 1500);
+            return () => clearTimeout(timer);
+        }
+    }, [selectedBank, accountNumber]);
 
     const handlePay = () => {
         setIsLoading(true);
@@ -81,8 +104,8 @@ const Payment = ({ cartItems, deliveryType = 'delivery', onLoginClick, onHomeCli
                                     key={method}
                                     onClick={() => setPaymentMethod(method)}
                                     className={`px-5 py-2.5 rounded-xl text-sm font-semibold border transition-all ${paymentMethod === method
-                                            ? 'bg-chuks-orange text-white border-chuks-orange shadow-md'
-                                            : 'bg-white text-gray-500 border-gray-200 hover:border-chuks-orange hover:text-chuks-orange'
+                                        ? 'bg-chuks-orange text-white border-chuks-orange shadow-md'
+                                        : 'bg-white text-gray-500 border-gray-200 hover:border-chuks-orange hover:text-chuks-orange'
                                         }`}
                                 >
                                     {method === 'card' && '💳  Card'}
@@ -191,8 +214,31 @@ const Payment = ({ cartItems, deliveryType = 'delivery', onLoginClick, onHomeCli
                                     placeholder="10-digit NUBAN account number"
                                     className="w-full border border-gray-200 rounded-lg px-4 py-4 text-sm focus:outline-none focus:border-chuks-orange transition-colors tracking-widest"
                                 />
-                                {accountNumber.length === 10 && selectedBank && (
-                                    <p className="text-xs text-green-600 mt-2 font-medium">✓ Account verified with {selectedBank}</p>
+                                {/* Account verification feedback */}
+                                {isVerifying && (
+                                    <div className="mt-3 flex items-center gap-2 text-sm text-gray-500">
+                                        <svg className="animate-spin w-4 h-4 text-chuks-orange" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                                        </svg>
+                                        <span>Verifying account...</span>
+                                    </div>
+                                )}
+                                {accountName && !isVerifying && (
+                                    <div className="mt-3 flex items-center justify-between bg-green-50 border border-green-200 rounded-xl px-4 py-3">
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-7 h-7 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+                                                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p className="text-xs text-gray-500">Account Name</p>
+                                                <p className="text-sm font-bold text-gray-900">{accountName}</p>
+                                            </div>
+                                        </div>
+                                        <span className="text-xs text-green-600 font-medium">{selectedBank}</span>
+                                    </div>
                                 )}
                             </div>
                         </div>
